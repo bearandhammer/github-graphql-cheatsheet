@@ -329,3 +329,135 @@ query ($loginName: String = "bearandhammer") {
   }
 }
 ```
+
+##### Example Output
+
+```json
+{
+  "data": {
+    "user": {
+      "id": "MDQ6VXNlcjUxMTM1MTgy",
+      "name": "Lewis Grint",
+      "login": "bearandhammer",
+      "url": "https://github.com/bearandhammer",
+      "location": "Attleborough, Norfolk",
+      "bio": "I'm a software developer who loves tinkering with anything I can get my hands on! Random topics and forays off the beaten track = me.",
+      "repositories": {
+        "totalCount": 15,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": true,
+          "startCursor": "Y3Vyc29yOnYyOpHOC0VLtw==",
+          "endCursor": "Y3Vyc29yOnYyOpHOD9mZUw=="
+        },
+        "edges": [
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOC0VLtw==",
+            "node": {
+              "name": "portfolio",
+              "url": "https://github.com/bearandhammer/portfolio"
+            }
+          },
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOD8dKMQ==",
+            "node": {
+              "name": "typescript-forays",
+              "url": "https://github.com/bearandhammer/typescript-forays"
+            }
+          },
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOD9mZUw==",
+            "node": {
+              "name": "github-actions-web-app",
+              "url": "https://github.com/bearandhammer/github-actions-web-app"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Pagination (next page)
+
+Here, the `after` property value is set to the `endCursor` value, that gracefully moves us on to the next page of records:
+
+```graphql
+query ($loginName: String = "bearandhammer") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+    repositories(first: 3, after: "Y3Vyc29yOnYyOpHOD9mZUw==") {
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+```
+
+##### Example Output
+
+```json
+{
+  "data": {
+    "user": {
+      "id": "MDQ6VXNlcjUxMTM1MTgy",
+      "name": "Lewis Grint",
+      "login": "bearandhammer",
+      "url": "https://github.com/bearandhammer",
+      "location": "Attleborough, Norfolk",
+      "bio": "I'm a software developer who loves tinkering with anything I can get my hands on! Random topics and forays off the beaten track = me.",
+      "repositories": {
+        "totalCount": 15,
+        "pageInfo": {
+          "hasPreviousPage": true,
+          "hasNextPage": true,
+          "startCursor": "Y3Vyc29yOnYyOpHOD91wvA==",
+          "endCursor": "Y3Vyc29yOnYyOpHOD_QlMg=="
+        },
+        "edges": [
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOD91wvA==",
+            "node": {
+              "name": "netcore-starter-web-app-test",
+              "url": "https://github.com/bearandhammer/netcore-starter-web-app-test"
+            }
+          },
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOD-a2pA==",
+            "node": {
+              "name": "bearandhammer.github.io",
+              "url": "https://github.com/bearandhammer/bearandhammer.github.io"
+            }
+          },
+          {
+            "cursor": "Y3Vyc29yOnYyOpHOD_QlMg==",
+            "node": {
+              "name": "windows-terminal-theme",
+              "url": "https://github.com/bearandhammer/windows-terminal-theme"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
