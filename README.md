@@ -78,3 +78,45 @@ query getAuthenticatedUserDetailWithStatus {
   }
 }
 ```
+
+#### Alias applied to a particular Field
+
+```
+{
+  craig:user(login:"craigvincent") {
+    id
+    name
+    url
+    bio
+  }
+  bear:user(login:"bearandhammer") {
+    user_id:id
+    name
+    url
+    bio
+  }
+}
+```
+
+#### Simple Fragment Usage
+
+Here we want a simple way to define the User-based fields we want to return (without needing to make adjustments throughout several areas of the code):
+
+```
+{
+  craig:user(login:"craigvincent") {
+    ...userFields
+  }
+  bear:user(login:"bearandhammer") {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+    id
+    name
+    url
+    bio
+}
+```
+
