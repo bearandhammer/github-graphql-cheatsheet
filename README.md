@@ -246,7 +246,7 @@ fragment userFields on User {
 }
 ```
 
-#### Query Variables Definition
+##### Query Variables Definition
 
 ```graphql
 {
@@ -254,3 +254,43 @@ fragment userFields on User {
   "repoName": "orchard-core-sample"
 }
 ```
+
+#### Directives
+
+NOTES:
+
+- Changes to the query structure.
+- Attach to Field or Fragments.
+- `@Include` & `@Skip`.
+
+@DirectiveName (if: Boolean).
+
+#### Include and Skip
+
+Here we include/skip the `bio`/`status` properties based on the `$loadStatus` variable:
+
+```graphql
+query ($loadStatus: Boolean!) {
+  viewer {
+    id
+    name
+    login
+    url
+    location
+    bio @skip(if: $loadStatus)
+    status @include(if: $loadStatus) {
+      emoji
+      message
+    }
+  }
+}
+```
+
+##### Query Variables Definition
+
+```graphql
+{
+  "loadStatus": true
+}
+```
+
