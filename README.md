@@ -120,3 +120,22 @@ fragment userFields on User {
 }
 ```
 
+#### Apply an Alias to a Fragment
+
+```graphql
+{
+  craig:user(login:"craigvincent") {
+    ...userFields
+  }
+  bear:user(login:"bearandhammer") {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+    user_id:id
+    name
+    url
+    bio
+}
+```
