@@ -173,7 +173,7 @@ fragment userFields on User {
     ... on ProfileOwner {
     	id
       name
-  	}
+    }
     ... on UniformResourceLocatable {
       res_loc:url
       resourcePath
