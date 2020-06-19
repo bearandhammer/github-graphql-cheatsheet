@@ -224,3 +224,33 @@ query ($loginName: String = "craigvincent") {
   }
 }
 ```
+
+#### Inline Variable (inside Fragment)
+
+```graphql
+query ($loginName: String!, $repoName: String!) {
+  user(login: $loginName) {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+  id
+  name
+  url
+  bio,
+  repository(name: $repoName) {
+    name
+    url
+  }
+}
+```
+
+#### Query Variables Definition
+
+```graphql
+{
+  "loginName": "bearandhammer",
+  "repoName": "orchard-core-sample"
+}
+```
