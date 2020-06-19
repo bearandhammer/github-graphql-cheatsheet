@@ -182,3 +182,45 @@ fragment userFields on User {
   }
 }
 ```
+
+#### Variable Usage
+
+Here a named query is created specifying that a variable named `$loginName` of type string should be provided. The exclamation mark denotes that this variable is mandatory.
+
+```graphql
+query ($loginName: String!) {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+  }
+}
+```
+
+##### Query Variables Definition
+
+```graphql
+{
+  "loginName": "bearandhammer"
+}
+```
+
+#### Variable Usage (optional)
+
+In this instance trhe `$loginName` variable is not mandatory. A default value of `craigvincent` is supplied:
+
+```graphql
+query ($loginName: String = "craigvincent") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+  }
+}
+```
