@@ -7,7 +7,7 @@ Here's a running 'stream of consciousness' based on initially tinkerings with Gr
 
 #### Stock Query (return the login name)
 
-```
+```graphql
 query { 
   viewer { 
     login
@@ -17,7 +17,7 @@ query {
 
 #### Get Authenticated User Detail
 
-```
+```graphql
 query getAuthenticatedUserDetail {
   viewer {
     id
@@ -30,7 +30,7 @@ query getAuthenticatedUserDetail {
 
 ### Get Authenticated User Detail Expanded (inc. Status)
 
-```
+```graphql
 query getAuthenticatedUserDetailWithStatus {
   viewer {
     id
@@ -49,7 +49,7 @@ query getAuthenticatedUserDetailWithStatus {
 
 ### Get Detail for a specific User (Arguments)
 
-```
+```graphql
 {
   user(login:"craigvincent") {
     id
@@ -62,7 +62,7 @@ query getAuthenticatedUserDetailWithStatus {
 
 #### Get Details for multiple Users (Alias)
 
-```
+```graphql
 {
   craig:user(login:"craigvincent") {
     id
@@ -81,7 +81,7 @@ query getAuthenticatedUserDetailWithStatus {
 
 #### Alias applied to a particular Field
 
-```
+```graphql
 {
   craig:user(login:"craigvincent") {
     id
@@ -102,7 +102,7 @@ query getAuthenticatedUserDetailWithStatus {
 
 Here we want a simple way to define the User-based fields we want to return (without needing to make adjustments throughout several areas of the code):
 
-```
+```graphql
 {
   craig:user(login:"craigvincent") {
     ...userFields
