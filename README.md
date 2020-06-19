@@ -1,7 +1,7 @@
 # github-graphql-cheatsheet
 Used for jotting down some queries surrounding GraphQL and GitHub.
 
-## Sample queries
+## Sample Queries
 
 Here's a running 'stream of consciousness' based on initially tinkerings with GraphQL and GitHub: 
 
@@ -43,6 +43,38 @@ query getAuthenticatedUserDetailWithStatus {
       emoji
       message
     }
+  }
+}
+```
+
+### Get Detail for a specific User (Arguments)
+
+```
+{
+  user(login:"craigvincent") {
+    id
+    name
+    url
+    bio
+  }
+}
+```
+
+#### Get Details for multiple Users (Alias)
+
+```
+{
+  craig:user(login:"craigvincent") {
+    id
+    name
+    url
+    bio
+  }
+  bear:user(login:"bearandhammer") {
+    id
+    name
+    url
+    bio
   }
 }
 ```
