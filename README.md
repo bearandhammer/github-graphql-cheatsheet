@@ -294,3 +294,38 @@ query ($loadStatus: Boolean!) {
 }
 ```
 
+#### Pagination
+
+- `repositories` - consumes a value (we want to pull the first 3 values through).
+- `totalCount` - the count of entities in the collection.
+- `pageInfo` - allows access to properties denoting if we have a previous/next page. A `Cursor` denotes a unique identifier for a particular record.
+- `edges` - allows access to the physical information behind the first three records via `node` (notice how the `cursor` values tie back to the `pageInfo` `startCursor` & `endCursor`, as expected).
+
+```graphql
+query ($loginName: String = "bearandhammer") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+    repositories(first: 3) {
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+```
