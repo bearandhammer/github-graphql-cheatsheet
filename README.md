@@ -28,7 +28,7 @@ query getAuthenticatedUserDetail {
 }
 ```
 
-### Get Authenticated User Detail Expanded (inc. Status)
+#### Get Authenticated User Detail Expanded (inc. Status)
 
 ```graphql
 query getAuthenticatedUserDetailWithStatus {
@@ -47,7 +47,7 @@ query getAuthenticatedUserDetailWithStatus {
 }
 ```
 
-### Get Detail for a specific User (Arguments)
+#### Get Detail for a specific User (Arguments)
 
 ```graphql
 {
@@ -137,5 +137,48 @@ fragment userFields on User {
     name
     url
     bio
+}
+```
+
+#### Specific change on top of a Fragment
+
+```graphql
+{
+  craig:user(login:"craigvincent") {
+    ...userFields
+  }
+  bear:user(login:"bearandhammer") {
+    ...userFields
+    location
+  }
+}
+
+fragment userFields on User {
+    user_id:id
+    name
+    url
+    bio
+}
+```
+
+#### Inline Fragment
+
+```graphql
+{
+  user(login:"bearandhammer") {
+    ... on Actor {
+      login
+      url
+    }
+    ... on ProfileOwner {
+    	id
+      name
+  	}
+    ... on UniformResourceLocatable {
+      res_loc:url
+      resourcePath
+    }
+    bio
+  }
 }
 ```
