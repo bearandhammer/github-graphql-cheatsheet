@@ -461,3 +461,102 @@ query ($loginName: String = "bearandhammer") {
 }
 ```
 
+#### Pagination (last records)
+
+It is possible to retrieve the last 'x' records using `last`, as follows:
+
+```graphql
+query ($loginName: String = "bearandhammer") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+    repositories(last: 3) {
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+```
+
+From here, you can specify the `before` argument using the `startCursor` value:
+
+```graphql
+query ($loginName: String = "bearandhammer") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+    repositories(last: 3, before: "Y3Vyc29yOnYyOpHOED3_XQ==") {
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sorting
+
+Use the `orderBy` argument as illustrated (to select a target field and sort direction):
+
+```graphql
+query ($loginName: String = "bearandhammer") {
+  user(login: $loginName) {
+    id
+    name
+    login
+    url
+    location
+    bio
+    repositories(last: 3, before: "Y3Vyc29yOnYyOpHOED3_XQ==", orderBy: {
+      field: NAME
+      direction: DESC
+    }) {
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+```
