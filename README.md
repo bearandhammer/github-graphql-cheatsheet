@@ -649,5 +649,25 @@ type PhotoResult {
   width: Int
 }
 
+union SearchResult = WebResult | PhotoResult
 
+type SearchQuery {
+  searchResult: SearchResult
+}
 ```
+
+##### Execute Query
+
+```graphql
+query {
+  searchResult {
+    ... on WebResult {
+      webPageUrl
+    }
+    ... on PhotoResult {
+      imageUrl
+    }
+  }
+}
+```
+
