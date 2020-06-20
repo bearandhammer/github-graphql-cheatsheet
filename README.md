@@ -560,3 +560,50 @@ query ($loginName: String = "bearandhammer") {
   }
 }
 ```
+
+## GraphQL Schema
+
+Basic set - defines the supported:
+- Queries
+- Mutations
+- Fields
+- Types
+
+Schema - used to determine if a query is valid (GraphQL Schema Language).
+
+#### Types
+
+- Basic components.
+- Sent/received by the server.
+- Scalar Type.
+- Object Type.
+
+Scalar Type, Object Type, Interface Type, Union Type, Enum Type, Input Object Type.
+
+#### Scalar Type
+
+Represents a primitive value (Integer, Float, String, Boolean and ID). We can  opt to add/omit types as required (use the `scalar` keyword).
+
+```graphql
+scalar Date
+```
+
+#### Object Type
+
+Describes a more complex entities, consists of fields (which can be Scalar or Object types).
+
+```graphql
+type User {
+  id: ID
+  userName: String
+  mailId: String
+  contactDetails: ContactDetails
+}
+
+type ContactDetails {
+  street: String
+  city: String
+  state: String
+  zipCode: String
+}
+```
