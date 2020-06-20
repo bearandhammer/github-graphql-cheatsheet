@@ -697,3 +697,24 @@ input AddressDetail {
 }
 ```
 
+#### List
+
+We can use a type modifier to mark a type as a List, which indicates that this field will return an array of that type. In the schema language, this is denoted by wrapping the type in square brackets. Can be used on Scalar and Object types.
+
+```graphql
+type TravelDetails {
+  countriesVisited: [CountryEnumType]
+  visitDetails: [VisitDetailsObjectType]
+}
+```
+
+### Non-Null
+
+Fields are nullable by default, but the exclamation mark can be used to explicitly state a value is not nullable. This can be used against List types also. Can be used on Scalar and Object types. Basic example:
+
+```graphql
+type OrderDetails {
+  userMail: String!
+  cartItems: [CartItem]!
+}
+```
