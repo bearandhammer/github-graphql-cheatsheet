@@ -607,3 +607,47 @@ type ContactDetails {
   zipCode: String
 }
 ```
+
+#### Interface
+
+Much like any other language, an Interface is an abstract type that includes a certain set of fields that a type must include to implement the interface. Multiple interfaces can be implemented also:
+
+```graphql
+interface BaseUser {
+  userName: String
+  password: String
+}
+
+interface BaseAdmin {
+  canGenerateReport: Boolean
+  canManageUsers: Boolean
+}
+
+type Admin implements BaseUser & BaseAdmin {
+  userName: String
+  password: String
+  canGenerateReport: Boolean
+  canManageUsers: Boolean
+}
+```
+
+#### Union Type
+
+Union types are very similar to interfaces, but they don't get to specify any common fields between the types.
+
+Example:
+
+```graphql
+type WebResult {
+  webPageUrl: Url
+  description: String
+}
+
+type PhotoResult {
+  imageUrl: Url
+  height: Int
+  width: Int
+}
+
+
+```
