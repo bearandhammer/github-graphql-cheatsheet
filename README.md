@@ -671,3 +671,29 @@ query {
 }
 ```
 
+#### Enum Type
+
+Enumeration types are a special kind of scalar that is restricted to a particular set of allowed values (again, much like other languages) - note the naming convention for the allowed values:
+
+```graphql
+enum season {
+  SPRING
+  SUMMER
+  AUTUMN
+  WINTER
+}
+```
+
+#### InputObject Type
+
+If you need complex argument data then this is the ticket. This type is particularly valuable in the case of mutations, where you might want to pass in a whole object to be created. The Fields can be Scalar, Enum or of InputObject type.
+
+```graphql
+input AddressDetail {
+  street: String
+  city: String
+  state: String
+  zipCode: String
+}
+```
+
