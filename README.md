@@ -571,7 +571,7 @@ Basic set - defines the supported:
 
 Schema - used to determine if a query is valid (GraphQL Schema Language).
 
-#### Types
+### Types
 
 - Basic components.
 - Sent/received by the server.
@@ -708,7 +708,7 @@ type TravelDetails {
 }
 ```
 
-### Non-Null
+#### Non-Null
 
 Fields are nullable by default, but the exclamation mark can be used to explicitly state a value is not nullable. This can be used against List types also. Can be used on Scalar and Object types. Basic example:
 
@@ -716,5 +716,83 @@ Fields are nullable by default, but the exclamation mark can be used to explicit
 type OrderDetails {
   userMail: String!
   cartItems: [CartItem]!
+}
+```
+
+### Introspection
+
+Essentially, means querying the schema itself (to obtain details of types, fields, etc.). Here's an example relating to GitHub specifically (tackling information behind the User type):
+
+```graphql
+{
+  __type(name: "User") {
+    name
+    description
+    interfaces {
+      name
+    }
+    fields {
+      name
+      description
+      args {
+        name
+      }
+      type {
+        name
+        ofType {
+          name
+        }
+      }
+    }
+  }
+}
+```
+
+Here's a further example of using `__schema` to obtain information about queries/mutations:
+
+```graphql
+{
+  __schema {
+    queryType {
+      fields {
+        name
+      }
+    }
+    mutationType {
+      fields {
+        name
+      }
+    }
+  }
+}
+```
+
+One more example of using introspection (to obtain the types behind certain fields on the go):
+
+```graphql
+{
+  viewer {
+    __typename
+    status {
+      message
+      __typename
+    }
+  }
+}
+```
+
+#####  Example Output
+
+```json
+{
+  "data": {
+    "viewer": {
+      "__typename": "User",
+      "status": {
+        "message": "Coding and happy",
+        "__typename": "UserStatus"
+      }
+    }
+  }
 }
 ```
