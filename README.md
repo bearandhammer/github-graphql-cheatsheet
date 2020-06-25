@@ -885,3 +885,15 @@ mutation($updatedStatus: ChangeUserStatusInput!, $updatedRepo: UpdateRepositoryI
 - Allows real-time notification of events.
 - Utilises a Response Stream.
 - Used in dynamic applications.
+
+Example:
+
+```graphql
+subscription {
+  orderEvent {
+    id
+    name
+    orderId
+  }
+}
+```
