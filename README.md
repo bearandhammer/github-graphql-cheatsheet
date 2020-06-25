@@ -796,3 +796,12 @@ One more example of using introspection (to obtain the types behind certain fiel
   }
 }
 ```
+
+### Mutations
+
+- `Mutation` keyword is used.
+- Allows you to insert/update or delete data.
+- Query variables are allowed.
+- Mutations can returned data.
+- Multiple requests handled in sequence.
+
