@@ -878,3 +878,10 @@ mutation($updatedStatus: ChangeUserStatusInput!, $updatedRepo: UpdateRepositoryI
   }
 }
 ```
+
+### Subscriptions
+
+- Created using the `Subscription` keyword.
+- Allows real-time notification of events.
+- Utilises a Response Stream.
+- Used in dynamic applications.
