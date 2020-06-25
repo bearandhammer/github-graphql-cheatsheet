@@ -805,3 +805,76 @@ One more example of using introspection (to obtain the types behind certain fiel
 - Mutations can returned data.
 - Multiple requests handled in sequence.
 
+#### Change User Status
+
+The example mutation:
+
+```graphql
+mutation($updatedStatus: ChangeUserStatusInput!) {
+  changeUserStatus(input: $updatedStatus) {
+    status {
+      emoji
+      message
+    }
+  }
+}
+```
+
+##### Query Variables Definition
+
+```graphql
+{
+  "updatedStatus": {
+    "message": "Status updated via GraphQL!",
+    "emoji": ":soccer:"
+  }
+}
+```
+
+##### Example Output
+
+```json
+{
+  "data": {
+    "changeUserStatus": {
+      "status": {
+        "emoji": ":soccer:",
+        "message": "Status updated via GraphQL!"
+      }
+    }
+  }
+}
+```
+
+#### Multiple Mutations
+
+```graphql
+mutation($updatedStatus: ChangeUserStatusInput!, $updatedRepo: UpdateRepositoryInput!) {
+  changeUserStatus(input: $updatedStatus) {
+    status {
+      emoji
+      message
+    }
+  }
+  updateRepository(input: $updatedRepo) {
+    repository {
+      hasWikiEnabled
+    }
+  }
+}
+```
+
+##### Query Variables Definition
+
+```graphql
+{
+  "updatedStatus": {
+    "message": "Status updated via GraphQL!",
+    "emoji": ":soccer:"
+  },
+  "updatedRepo": {
+    "repositoryId": "SOME_ID",
+    "hasWikiEnabled": false
+  }
+}
+```
